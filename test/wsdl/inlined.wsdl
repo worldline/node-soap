@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="AtolServices"
+    targetNamespace="http://atol.service.orange.com/V3" xmlns:apachesoap="http://xml.apache.org/xml-soap"
+    xmlns:impl="http://atol.service.orange.com/V3" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns="http://www.w3.org/2001/XMLSchema">
+
+    <wsdl:types>
+        <schema targetNamespace="http://atol.service.orange.com/V3"
+            xmlns:bo="http://atol.businessobject.orange.com">
+
+<schema elementFormDefault="qualified"
+    targetNamespace="http://atol.businessobject.orange.com" xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:bo="http://atol.businessobject.orange.com">
+
+    <!-- RecupererListeMotifs -->
+
+    <complexType name="RecupererListeMotifs">
+        <sequence>
+            <element minOccurs="1" maxOccurs="1" name="univers" type="bo:Univers" />
+            <element minOccurs="0" maxOccurs="1" name="nd" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="aidInternet" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="origineAppel"
+                type="string" />
+            <element minOccurs="1" maxOccurs="1" name="idSession" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="testLigne" type="integer" />
+        </sequence>
+    </complexType>
+
+    <complexType name="RecupererListeMotifsReponse">
+        <sequence>
+            <element minOccurs="0" maxOccurs="1" name="nd" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="aidInternet" type="string" />
+            <element minOccurs="0" maxOccurs="unbounded" name="motifs"
+                type="bo:Motif" />
+            <element minOccurs="0" maxOccurs="1" name="estAdslNu" type="boolean" />
+            <element minOccurs="0" maxOccurs="1" name="profilClient" type="bo:ProfilClient" />
+            <element minOccurs="0" maxOccurs="1" name="codeProfil" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="identifiantCas"
+                type="string" />
+            <element minOccurs="1" maxOccurs="1" name="codeRetour" type="int" />
+            <element minOccurs="0" maxOccurs="1" name="messageErreur"
+                type="string" />
+        </sequence>
+    </complexType>
+
+    <complexType name="Motif">
+        <sequence>
+            <element minOccurs="1" maxOccurs="1" name="code" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="libelle" type="string" />
+            <element minOccurs="0" maxOccurs="unbounded" name="sousMotifs"
+                type="bo:SousMotif" />
+        </sequence>
+    </complexType>
+
+    <complexType name="SousMotif">
+        <sequence>
+            <element minOccurs="1" maxOccurs="1" name="code" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="libelle" type="string" />
+        </sequence>
+    </complexType>
+
+    <!-- PreparerSequence -->
+    <complexType name="PreparerSequenceTestInput">
+        <sequence>
+            <element minOccurs="1" maxOccurs="1" name="nd" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="aidInternet" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="univers" type="bo:Univers" />
+            <element minOccurs="1" maxOccurs="1" name="codeMotif" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="codeSousMotif"
+                type="string" />
+            <element minOccurs="1" maxOccurs="1" name="origineAppel"
+                type="string" />
+            <element minOccurs="1" maxOccurs="1" name="idSession" type="string" />
+        </sequence>
+    </complexType>
+
+    <complexType name="PreparerSequenceTestOutput">
+        <sequence>
+            <element minOccurs="0" maxOccurs="1" name="sequence" type="bo:Sequence" />
+            <element minOccurs="0" maxOccurs="1" name="noeud" type="bo:Noeud" />
+            <element minOccurs="0" maxOccurs="1" name="testAtol" type="bo:TestAtol" />
+            <element minOccurs="0" maxOccurs="1" name="codeSousMotif"
+                type="string" />
+            <element minOccurs="1" maxOccurs="1" name="codeRetour" type="int" />
+            <element minOccurs="0" maxOccurs="1" name="messageErreur"
+                type="string" />
+        </sequence>
+    </complexType>
+
+    <!-- ExecuterTest -->
+    <complexType name="ExecuterTestInput">
+        <sequence>
+            <element minOccurs="1" maxOccurs="1" name="nd" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="aidInternet" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="univers" type="bo:Univers" />
+            <element minOccurs="1" maxOccurs="1" name="idSequenceTest"
+                type="long" />
+            <element minOccurs="1" maxOccurs="1" name="idVersionSequenceTest"
+                type="long" />
+            <element minOccurs="1" maxOccurs="1" name="idNoeudTest" type="long" />
+            <element minOccurs="1" maxOccurs="1" name="codeMotif" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="codeSousMotif"
+                type="string" />
+            <element minOccurs="0" maxOccurs="1" name="profilClient"
+                type="bo:ProfilClient" />
+            <element minOccurs="1" maxOccurs="1" name="origineAppel"
+                type="string" />
+            <element minOccurs="1" maxOccurs="1" name="idSession" type="string" />
+        </sequence>
+    </complexType>
+
+    <complexType name="ExecuterTestOutput">
+        <sequence>
+            <element minOccurs="0" maxOccurs="1" name="sequence" type="bo:Sequence" />
+            <element minOccurs="0" maxOccurs="1" name="noeud" type="bo:Noeud" />
+            <element minOccurs="0" maxOccurs="1" name="testAtol" type="bo:TestAtol" />
+            <element minOccurs="0" maxOccurs="1" name="chat" type="bo:Chat" />
+            <element minOccurs="0" maxOccurs="1" name="idOrchestra" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="libCourtMotif"
+                type="string" />
+            <element minOccurs="0" maxOccurs="1" name="codeSousMotif"
+                type="string" />
+            <element minOccurs="0" maxOccurs="1" name="libCourtSousMotif"
+                type="string" />
+            <element minOccurs="1" maxOccurs="1" name="codeRetour" type="int" />
+            <element minOccurs="0" maxOccurs="1" name="messageErreur"
+                type="string" />
+        </sequence>
+    </complexType>
+    
+    <!--
+                Données communes aux services preparerSequenceTest et executerTest
+    -->
+    <complexType name="Sequence">
+        <sequence>
+            <element minOccurs="0" maxOccurs="1" name="id" type="long" />
+            <element minOccurs="0" maxOccurs="1" name="codeMagic" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="version" type="bo:Version" />
+        </sequence>
+    </complexType>
+
+    <complexType name="Version">
+        <sequence>
+            <element minOccurs="0" maxOccurs="1" name="id" type="long" />
+            <element minOccurs="0" maxOccurs="1" name="numero" type="long" />
+        </sequence>
+    </complexType>
+
+    <complexType name="Noeud">
+        <sequence>
+            <element minOccurs="0" maxOccurs="1" name="id" type="long" />
+            <element minOccurs="0" maxOccurs="1" name="type" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="numero" type="string" />
+        </sequence>
+    </complexType>
+
+    <complexType name="TestAtol">
+        <sequence>
+            <element minOccurs="0" maxOccurs="1" name="codeMagic" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="dureeMax" type="long" />
+            <element minOccurs="0" maxOccurs="1" name="ruptureCnx" type="boolean" />
+        </sequence>
+    </complexType>
+
+    <complexType name="Chat">
+        <sequence>
+            <element minOccurs="0" maxOccurs="1" name="codePlateau" type="string" />
+            <element minOccurs="0" maxOccurs="1" name="ouvert" type="boolean" />
+            <element minOccurs="0" maxOccurs="1" name="diagnostic" type="string" />
+        </sequence>
+    </complexType>
+    
+    <!-- SelectionnerPlateau -->
+    <complexType name="SelectionnerPlateauInput">
+        <sequence>
+            <element minOccurs="1" maxOccurs="1" name="origineAppel" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="nd" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="profilClient" type="bo:ProfilClient" />
+            <element minOccurs="1" maxOccurs="1" name="typePlateau" type="bo:TypePlateau" />
+            <element minOccurs="1" maxOccurs="1" name="univers" type="bo:Univers" />
+        </sequence>
+    </complexType>
+    
+    <complexType name="SelectionnerPlateauOutput">
+        <sequence>
+            <element minOccurs="0" maxOccurs="1" name="plateau" type="bo:Plateau" />
+            <element minOccurs="1" maxOccurs="1" name="codeRetour" type="int" />
+            <element minOccurs="0" maxOccurs="1" name="messageErreur" type="string" />
+        </sequence>
+    </complexType>
+    
+    <simpleType name="ProfilClient">
+        <restriction base="string">
+            <enumeration value="ADSL" />
+            <enumeration value="VDSL" />
+            <enumeration value="FIBRE" />
+        </restriction>
+    </simpleType>
+    
+    <simpleType name="TypePlateau">
+        <restriction base="string">
+            <enumeration value="CHAT" />
+            <enumeration value="CLICKTOCALLBACK" />
+        </restriction>
+    </simpleType>
+    
+    <simpleType name="Univers">
+        <restriction base="string">
+            <enumeration value="HD" />
+            <enumeration value="RTC" />
+        </restriction>
+    </simpleType>
+    
+    <complexType name="Plateau">
+        <sequence>
+            <element minOccurs="1" maxOccurs="1" name="codePlateau" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="typePlateau" type="bo:TypePlateau" />
+            <element minOccurs="1" maxOccurs="1" name="ouvert" type="boolean" />
+        </sequence>
+    </complexType>
+
+</schema>
+
+            <element name="recupererListeMotifs">
+                <complexType>
+                    <sequence>
+                        <element name="requete" type="bo:RecupererListeMotifs" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="recupererListeMotifsReponse">
+                <complexType>
+                    <sequence>
+                        <element name="reponse" type="bo:RecupererListeMotifsReponse" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="preparerSequenceTest">
+                <complexType>
+                    <sequence>
+                        <element name="requete" type="bo:PreparerSequenceTestInput" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="preparerSequenceTestReponse">
+                <complexType>
+                    <sequence>
+                        <element name="reponse" type="bo:PreparerSequenceTestOutput" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="executerTest">
+                <complexType>
+                    <sequence>
+                        <element name="requete" type="bo:ExecuterTestInput" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="executerTestReponse">
+                <complexType>
+                    <sequence>
+                        <element name="reponse" type="bo:ExecuterTestOutput" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="selectionnerPlateau">
+                <complexType>
+                    <sequence>
+                        <element name="requete" type="bo:SelectionnerPlateauInput" />
+                    </sequence>
+                </complexType>
+            </element>
+            <element name="selectionnerPlateauReponse">
+                <complexType>
+                    <sequence>
+                        <element name="reponse" type="bo:SelectionnerPlateauOutput" />
+                    </sequence>
+                </complexType>
+            </element>
+        </schema>
+    </wsdl:types>
+
+    <wsdl:message name="recupererListeMotifsRequete">
+        <wsdl:part name="parametresRecupererListeMotifsRequete"
+            element="impl:recupererListeMotifs" />
+    </wsdl:message>
+
+    <wsdl:message name="recupererListeMotifsReponse">
+        <wsdl:part name="parametresRecupererListeMotifsReponse"
+            element="impl:recupererListeMotifsReponse" />
+    </wsdl:message>
+
+    <wsdl:message name="preparerSequenceTestRequete">
+        <wsdl:part name="parametresPreparerSequenceTestRequete"
+            element="impl:preparerSequenceTest" />
+    </wsdl:message>
+
+    <wsdl:message name="preparerSequenceTestReponse">
+        <wsdl:part name="parametresPreparerSequenceTestReponse"
+            element="impl:preparerSequenceTestReponse" />
+    </wsdl:message>
+
+    <wsdl:message name="executerTestRequete">
+        <wsdl:part name="parametresExecuterTestRequete" element="impl:executerTest" />
+    </wsdl:message>
+
+    <wsdl:message name="executerTestReponse">
+        <wsdl:part name="parametresExecuterTestReponse" element="impl:executerTestReponse" />
+    </wsdl:message>
+    
+    <wsdl:message name="selectionnerPlateauRequete">
+        <wsdl:part name="parametresSelectionnerPlateauRequete" element="impl:selectionnerPlateau" />
+    </wsdl:message>
+
+    <wsdl:message name="selectionnerPlateauReponse">
+        <wsdl:part name="parametresSelectionnerPlateauReponse" element="impl:selectionnerPlateauReponse" />
+    </wsdl:message>
+
+    <wsdl:portType name="ManageAtol">
+        <wsdl:operation name="recupererListeMotifs">
+            <wsdl:input message="impl:recupererListeMotifsRequete" />
+            <wsdl:output message="impl:recupererListeMotifsReponse" />
+        </wsdl:operation>
+        <wsdl:operation name="preparerSequenceTest">
+            <wsdl:input message="impl:preparerSequenceTestRequete" />
+            <wsdl:output message="impl:preparerSequenceTestReponse" />
+        </wsdl:operation>
+        <wsdl:operation name="executerTest">
+            <wsdl:input message="impl:executerTestRequete" />
+            <wsdl:output message="impl:executerTestReponse" />
+        </wsdl:operation>
+        <wsdl:operation name="selectionnerPlateau">
+            <wsdl:input message="impl:selectionnerPlateauRequete" />
+            <wsdl:output message="impl:selectionnerPlateauReponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="ManageAtolServicesSoapBinding" type="impl:ManageAtol">
+        <wsdlsoap:binding style="document"
+            transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="recupererListeMotifs">
+            <wsdlsoap:operation />
+            <wsdl:input>
+                <wsdlsoap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="preparerSequenceTest">
+            <wsdlsoap:operation />
+            <wsdl:input>
+                <wsdlsoap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="executerTest">
+            <wsdlsoap:operation />
+            <wsdl:input>
+                <wsdlsoap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="selectionnerPlateau">
+            <wsdlsoap:operation />
+            <wsdl:input>
+                <wsdlsoap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <wsdlsoap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="ManageAtolServices">
+        <wsdl:port binding="impl:ManageAtolServicesSoapBinding"
+            name="ManageAtolPort">
+            <wsdlsoap:address location="http://localhost:9000/atol/services/atol" />
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

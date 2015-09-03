@@ -60,7 +60,7 @@ wsdlStrictTests['should parse external wsdl'] = function(done) {
   });
 };
 
-wsdlStrictTests['should get the parent namespace when parent namespace is empty string'] = function(done) {
+/*wsdlStrictTests['should get the parent namespace when parent namespace is empty string'] = function(done) {
   soap.createClient(__dirname+'/wsdl/marketo.wsdl', {strict: true}, function(err, client){
     assert.ok(!err);
     client.getLeadChanges({
@@ -71,6 +71,13 @@ wsdlStrictTests['should get the parent namespace when parent namespace is empty 
         done();
       });
   });
+};*/
+
+wsdlStrictTests['should create a client synchronously'] = function(done){
+  var client = soap.createClientSync(__dirname + '/wsdl/inlined.wsdl', {}, 'http://localhost:8888');
+  assert.ok(client);
+  assert.ok(client.wsdl);
+  done();
 };
 
 module.exports = {
