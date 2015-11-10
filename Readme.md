@@ -252,6 +252,19 @@ as default request options to the constructor:
       // soapHeader is the response soap header as a javascript object
   })
 ```
+
+### Client.*method*(args, callback) - retrieve attachments.
+
+``` javascript
+  client.MyFunction({name: 'value'}, function(err, result, raw, soapHeader,attachments) {
+      // result is a javascript object
+      // raw is the raw response
+      // soapHeader is the response soap header as a javascript object
+      // attachments is a list of object like this : {headers : headers, data : data attachement}
+      //  headers is an object where properties are headerName
+  })
+```
+
 ### Client.*service*.*port*.*method*(args, callback[, options]) - call a *method* using a specific *service* and *port*
 
 ``` javascript
